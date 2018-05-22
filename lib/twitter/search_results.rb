@@ -48,7 +48,9 @@ module Twitter
 
     # @return [Hash]
     def fetch_next_page
-      response = Twitter::REST::Request.new(@client, @request_method, @path, @options.merge(next_page)).perform
+      # Twitter removes "tweet_mode" param from the "next_results".
+      options  = @options.merge(next_page) if next_page?
+      response = Twitter::REST::Request.new(@client, @request_method, @path, options).perform
       self.attrs = response
     end
 
