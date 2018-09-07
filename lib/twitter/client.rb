@@ -5,7 +5,7 @@ require 'twitter/version'
 module Twitter
   class Client
     include Twitter::Utils
-    attr_accessor :access_token, :access_token_secret, :consumer_key, :consumer_secret, :proxy, :timeouts
+    attr_accessor :access_token, :access_token_secret, :consumer_key, :consumer_secret, :proxy, :timeouts, :dev_environment
     attr_writer :user_agent
 
     # Initializes a new Client object
@@ -46,8 +46,8 @@ module Twitter
 
   private
 
-    def blank?(s)
-      s.respond_to?(:empty?) ? s.empty? : !s
+    def blank?(string)
+      string.respond_to?(:empty?) ? string.empty? : !string
     end
   end
 end

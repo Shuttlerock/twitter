@@ -97,6 +97,22 @@ You can use this client to make any Twitter REST API request. For example:
 client.update("I'm tweeting with @gem!")
 ```
 
+## Premium Search API
+
+```ruby
+client = Twitter::REST::Client.new do |config|
+  config.consumer_key        = "YOUR_CONSUMER_KEY"
+  config.consumer_secret     = "YOUR_CONSUMER_SECRET"
+  config.dev_environment     = "YOUR_DEV_ENVIRONMENT"
+end
+```
+
+You can use this client to make a REST 30-Day Search API request. For example:
+
+```ruby
+client.premium_search("#ruby", { maxResults: 100 })
+```
+
 ## Streaming Clients
 
 Streaming clients are initialized just like single-user authenticated REST
@@ -131,11 +147,12 @@ If you'd like to connect via a proxy, a proxy can be configured by passing a
 `Hash` to your configuration:
 
 ```ruby
-  proxy: {
-    uri: Addressable::URI.parse("http://proxy_host:proxy_port"),
-    username: "proxy_username",
-    password: "proxy_password"
-  }
+proxy = {
+  host: "proxy.example.com",
+  port: 8080,
+  username: "proxy_username",
+  password: "proxy_password"
+}
 
 client = Twitter::REST::Client.new do |config|
   config.consumer_key        = "YOUR_CONSUMER_KEY"
