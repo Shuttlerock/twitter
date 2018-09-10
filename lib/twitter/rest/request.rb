@@ -28,12 +28,11 @@ module Twitter
         set_multipart_options!(request_method, options)
         @path = uri.path
         @options = options
-        @options_key = {get: :params, json_post: :json, delete: :params}[request_method] || :form
       end
 
       # @return [Array, Hash]
       def perform
-        response = http_client.headers(@headers).public_send(@request_method, @uri.to_s, @options_key => @options)
+        response = http_client.headers(@headers).public_send(@request_method, @uri.to_s, options_key => @options)
         response_body = response.body.empty? ? '' : symbolize_keys!(response.parse)
         response_headers = response.headers
         fail_or_return_response_body(response.code, response_body, response_headers)
