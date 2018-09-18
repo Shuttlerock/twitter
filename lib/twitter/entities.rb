@@ -88,7 +88,8 @@ module Twitter
     # @param key2 [Symbol]
     # @param key1 [Symbol]
     def entities(klass, key2, key1 = :entities)
-      @attrs.fetch(key1.to_sym, {}).fetch(key2.to_sym, []).collect do |entity|
+      source = @attrs.fetch(:extended_tweet, nil).blank? ? @attrs : @attrs.fetch(:extended_tweet)
+      source.fetch(key1.to_sym, {}).fetch(key2.to_sym, []).collect do |entity|
         klass.new(entity)
       end
     end
