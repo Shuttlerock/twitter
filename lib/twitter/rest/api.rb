@@ -1,4 +1,6 @@
+require 'twitter/rest/account_activity'
 require 'twitter/rest/direct_messages'
+require 'twitter/rest/direct_messages/welcome_messages'
 require 'twitter/rest/favorites'
 require 'twitter/rest/friends_and_followers'
 require 'twitter/rest/help'
@@ -21,7 +23,9 @@ module Twitter
     # @note All methods have been separated into modules and follow the same grouping used in {http://dev.twitter.com/doc the Twitter API Documentation}.
     # @see https://dev.twitter.com/overview/general/things-every-developer-should-know
     module API
+      include Twitter::REST::AccountActivity
       include Twitter::REST::DirectMessages
+      include Twitter::REST::DirectMessages::WelcomeMessages
       include Twitter::REST::Favorites
       include Twitter::REST::FriendsAndFollowers
       include Twitter::REST::Help
